@@ -1,4 +1,4 @@
-# <Project Name>
+# <\Project Name>
 
 One-line summary of what this project does and why it exists.
 
