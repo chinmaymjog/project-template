@@ -1,7 +1,5 @@
 # Task Tracker
 
-Template note: remove or replace all "Example" and "Mini example" content after your first real draft.
-
 ## Document Control
 
 - Project:
@@ -11,136 +9,61 @@ Template note: remove or replace all "Example" and "Mini example" content after 
 
 ## How To Use This File
 
-- Track execution, not ideas. Ideas belong in docs/project-spec.md.
-- Every task must reference at least one requirement ID.
-- Every completed task must include validation evidence.
+- Keep this file lightweight and current.
+- Track only work items that are actively planned or in progress.
+- Every task must include at least one requirement ID.
+- Every completed task must include one validation evidence link or note.
 
-Mini example:
-
-- T-003 implements FR-002 with Terraform plan report linked in Done table.
-
-## Working Rules
-
-- Work one task at a time.
-- Keep tasks small (target less than 1 day each).
-- Every task must define verification steps.
-- Human approval required before merge/deploy.
-
-## Current Sprint/Focus
+## Current Focus
 
 - Theme:
-- Start date:
-- End date:
-- Primary outcome:
+- Current objective:
+- This week target:
 
-Example:
+## Now (Do First)
 
-- Theme: Self-service environment provisioning MVP
-- Start date: 2026-06-10
-- End date: 2026-06-21
-- Primary outcome: Automated provisioning workflow for top 3 platform services
+Keep this section to a maximum of 3 tasks.
 
-## Backlog
+| ID | Task | Requirement IDs | Owner | Verification | Status |
+| -- | ---- | --------------- | ----- | ------------ | ------ |
+| T-001 |  | FR-.../NFR-... | Human+AI |  | Not Started/In Progress |
 
-| ID | Task | Type | Priority | Requirement IDs | Estimate | Dependencies | Notes |
-| -- | ---- | ---- | -------- | --------------- | -------- | ------------ | ----- |
-| T-001 |  | feat/fix/docs/refactor/test/chore | H/M/L | FR-.../NFR-... |  |  |  |
+## Next (Queue)
 
-Example row:
+Use this for tasks planned after Now.
 
-| T-001 | Build Terraform policy validation step | feat | H | FR-001 | 1d | None | Blocks automated apply |
+| ID | Task | Requirement IDs | Verification | Notes |
+| -- | ---- | --------------- | ------------ | ----- |
+| T-00X |  | FR-.../NFR-... |  |  |
 
-## In Progress
+## Later (Backlog)
 
-| ID | Task | Owner | Started | Requirement IDs | Plan Summary | Validation Plan | Blockers |
-| -- | ---- | ----- | ------- | --------------- | ------------ | --------------- | -------- |
-| T-XXX |  | Human+AI |  | FR-.../NFR-... |  |  |  |
+Use this for ideas or deferred work.
 
-Example row:
-
-| T-002 | Add GitHub Actions workflow for plan and apply | Human+AI | 2026-06-11 | FR-002,NFR-001 | Add reusable workflow and environment approvals | Dry-run in staging subscription | Waiting for IAM role mapping |
-
-## Session Context (For AI Continuity)
-
-### Last Session Summary
-
-- What was completed:
-- What changed in code/docs:
-- What is next:
-
-Example:
-
-- What was completed: Added Terraform policy validation checks.
-- What changed in code/docs: Updated IaC pipeline workflow and task T-001 status.
-- What is next: Start T-002 CI workflow integration.
-
-### Next Prompt Seed
-
-Use this to restart cleanly in a new session.
-
-```text
-Implement task T-XXX only.
-
-Allowed:
-- ...
-
-Not allowed:
-- ...
-
-Before coding:
-1) Show plan
-2) Wait for approval
-```
-
-## Review Queue
-
-| ID | PR | Reviewer | Review Focus | Status |
-| -- | -- | -------- | ------------ | ------ |
-|    |       |          |              |        |
-
-Example row:
-
-| T-002 | PR-14 | Platform Lead | IAM boundaries and rollback safety | In Review |
+| ID | Task | Requirement IDs | Notes |
+| -- | ---- | --------------- | ----- |
+| T-0YY |  | FR-.../NFR-... |  |
 
 ## Done
 
-| ID | Completed On | Requirement IDs | Verification Evidence | Docs Updated | Release Note |
-| -- | ------------ | --------------- | --------------------- | ------------ | ------------ |
-|    |              |                 |                       | Yes/No       |              |
-
-Example row:
-
-| T-001 | 2026-06-12 | FR-001 | terraform-plan-report-2026-06-12.md | Yes | Added policy checks before apply |
-
-## Verification Matrix
-
-Track implementation and proof against spec.
-
-| Requirement ID | Task IDs | Verification Type | Evidence | Status |
-| -------------- | -------- | ----------------- | -------- | ------ |
-| FR-001 | T-... | Unit/Integration/Manual | Link/path | Not Started/In Progress/Done |
-| NFR-001 | T-... | Load/Security/Observability check | Link/path | Not Started/In Progress/Done |
-
-Tip: keep this matrix current during execution, not only at release time.
-
-## Spec Coverage Check
-
-- [ ] Every in-progress task references at least one requirement ID.
-- [ ] Every requirement has at least one task.
-- [ ] Every completed task has verification evidence.
-- [ ] Every scope/requirement change is recorded in `docs/project-spec.md`.
+| ID | Completed On | Requirement IDs | Validation Evidence | Notes |
+| -- | ------------ | --------------- | ------------------- | ----- |
+| T-... | YYYY-MM-DD | FR-.../NFR-... | link/path/command output |  |
 
 ## Blocked
 
-| ID | Blocker | Owner | Mitigation | Next Checkpoint |
-| -- | ------- | ----- | ---------- | --------------- |
-|    |         |       |            |                 |
+| ID | Blocker | Owner | Mitigation | Next Check |
+| -- | ------- | ----- | ---------- | ---------- |
+| T-... |  |  |  | YYYY-MM-DD |
 
-Example row:
+## Quick Coverage Check
 
-| T-004 | Missing cloud subscription quota | Cloud Platform Team | Use smaller test node pools and staggered validation | 2026-06-14 |
+- [ ] Every task in Now has requirement IDs.
+- [ ] Every task in Done has validation evidence.
+- [ ] docs/project-spec.md reflects current scope.
+- [ ] docs/architecture.md reflects major decisions.
 
-## Definition of Done Checklist
+## Definition of Done
 
 - [ ] Code implemented
 - [ ] Tests pass
