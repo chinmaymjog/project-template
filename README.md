@@ -1,75 +1,48 @@
-# <\Project Name>
+# <Project Name>
 
-One-line summary of what this project does and why it exists.
+Short summary of what this project does and why it exists.
 
-Template note: remove or replace all "Example" content in this file after your first real draft.
+## Start Here
 
-## Start Here (First Day)
+Complete this checklist before implementation work:
 
-Use this checklist in order:
-
-- [ ] Update project name and summary in this README.
-- [ ] Fill docs/project-spec.md with problem, goals, and requirement IDs.
-- [ ] Fill docs/architecture.md with component flow and first ADR decisions.
-- [ ] Fill docs/tasks.md with T-001 to T-00N linked to requirement IDs.
-- [ ] Add real files to src/, infra/, scripts/, tests/, and config/.
-- [ ] Configure CI workflows in .github/workflows/.
-
-Suggested first commits:
-
-1. chore: initialize project structure
-2. docs: define project spec and scope
-3. docs: add architecture baseline and ADRs
-4. docs: seed task backlog with verification plan
+- [ ] Set project name and summary in this README.
+- [ ] Complete docs/project-spec.md with goals, scope, and requirement IDs.
+- [ ] Complete docs/architecture.md with component flow and initial ADRs.
+- [ ] Complete docs/tasks.md with task IDs linked to requirement IDs.
+- [ ] Add implementation files in src/, infra/, scripts/, tests/, and config/.
+- [ ] Configure CI in .github/workflows/.
 
 ## Problem Statement
 
-Write one short paragraph:
+Describe:
 
-- Current pain (what is broken or slow)
-- Who is affected
-- Why it matters now
-
-Example:
-
-"Provisioning a new Kubernetes environment takes 3 days and requires manual approvals across teams, delaying service onboarding and increasing configuration drift risk."
+- What is currently broken, slow, or risky.
+- Who is affected.
+- Why this matters now.
 
 ## Key Features
 
-List 3 to 6 core capabilities this project delivers.
+List 3 to 6 core capabilities this project will deliver.
 
-Example:
+## High-Level Architecture
 
-- Self-service environment requests
-- Automated policy and security checks before infra apply
-- GitOps rollout with drift visibility
-
-## High Level Architecture
-
-Summarize main components and flow in 4 to 8 lines. Link details in docs/architecture.md.
-
-Example:
-
-- API accepts environment requests.
-- Controller triggers Terraform plan and policy checks.
-- Approved changes apply through CI with environment protections.
-- Status service exposes rollout and drift state.
+Summarize the primary components and request/data flow in 4 to 8 lines.
+Reference details in docs/architecture.md.
 
 ## Technology Stack
 
-List runtime, IaC, CI/CD, observability, and cloud provider.
+Document:
 
-Example:
-
-- Runtime: Go
-- IaC: Terraform
-- CI/CD: GitHub Actions
-- Observability: Prometheus + Grafana
-- Cloud: Azure
+- Runtime/language
+- Infrastructure-as-Code tool
+- CI/CD platform
+- Observability tooling
+- Cloud or platform target
 
 ## Repository Structure
 
-Keep this tree aligned with the real repo.
+Keep this tree aligned with the actual repository:
 
 ```text
 project-root/
@@ -100,38 +73,20 @@ Directory intent:
 
 ## Installation
 
-Document prerequisites and local setup steps.
-
-Example:
-
-1. Install Terraform >= 1.8 and required language runtime.
-2. Authenticate cloud CLI for your target subscription/account.
-3. Run bootstrap command (for example: make bootstrap).
+Document local prerequisites and setup steps.
 
 ## Usage
 
-Document common day-to-day workflow.
-
-Example:
-
-1. Create task in docs/tasks.md.
-2. Open PR and run CI plan checks.
-3. Approve and apply changes.
-4. Validate rollout and update verification evidence.
+Document the day-to-day workflow for development and delivery.
 
 ## Roadmap
 
-List near-term milestones.
-
-Example:
-
-- Q3: Staging rollout and hardening
-- Q4: Production rollout and SLO automation
+List upcoming milestones and target outcomes.
 
 ## Documentation
 
-Link core project docs:
+Link core docs:
 
-- docs/project-spec.md: scope, goals, and requirements source of truth
+- docs/project-spec.md: requirements and scope source of truth
 - docs/architecture.md: design decisions and requirement mapping
 - docs/tasks.md: execution tracker and verification evidence
