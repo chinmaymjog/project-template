@@ -90,3 +90,6 @@ Link core docs:
 - docs/project-spec.md: requirements and scope source of truth
 - docs/architecture.md: design decisions and requirement mapping
 - docs/tasks.md: execution tracker and verification evidence
+
+---
+*Maintained by [Chinmay Jog](https://github.com/chinmaymjog) | 📖 [Read my articles on Medium](https://medium.com/@chinmaymjog)*
