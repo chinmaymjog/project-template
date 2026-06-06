@@ -2,16 +2,17 @@
 
 ## Document Control
 
-- Project:
-- Owner:
-- Last updated:
-- Version:
+- Project: <PROJECT NAME>
+- Owner: <OWNER>
+- Last updated: <YYYY-MM-DD>
+- Version: 0.1.0
 
 ## How To Use This File
 
 - Explain design choices so a new engineer can understand trade-offs quickly.
 - Keep each section tied to requirement IDs from docs/project-spec.md.
 - Add one ADR entry whenever a non-trivial decision is made.
+- Replace placeholders and example rows during the first real draft.
 
 ## System Context
 
@@ -30,7 +31,7 @@ Summarize the environment and boundaries in which this system operates.
 
 | Component | Responsibility | Owner |
 | --------- | -------------- | ----- |
-|           |                |       |
+| <component> | <responsibility> | <owner> |
 
 ### Interaction Diagram
 
@@ -96,7 +97,7 @@ Example:
 
 | Dependency | Purpose | SLA/Risk | Backup Plan |
 | ---------- | ------- | -------- | ----------- |
-|            |         |          |             |
+| <dependency> | <purpose> | <risk> | <fallback> |
 
 ## Architecture Decision Records (ADR-lite)
 
@@ -128,8 +129,7 @@ Use this table to show where each requirement is realized in architecture.
 
 ## Lessons Learned
 
-- Lesson 1
-- Lesson 2
+- Add lessons only after meaningful implementation or incident learning.
 
 ## Pending Decisions
 
