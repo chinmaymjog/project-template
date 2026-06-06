@@ -7,6 +7,7 @@ Short summary of what this project does and why it exists.
 Complete this checklist before implementation work:
 
 - [ ] Set project name and summary in this README.
+- [ ] Review `CONTRIBUTING.md` and `LICENSE` and replace template placeholders.
 - [ ] Complete docs/project-spec.md with goals, scope, and requirement IDs.
 - [ ] Complete docs/architecture.md with component flow and initial ADRs.
 - [ ] Complete docs/tasks.md with task IDs linked to requirement IDs.
@@ -46,6 +47,8 @@ Keep this tree aligned with the actual repository:
 
 ```text
 project-root/
+|-- CONTRIBUTING.md
+|-- LICENSE
 |-- .github/
 |   `-- workflows/
 |-- config/
@@ -70,6 +73,8 @@ Directory intent:
 - tests/: integration/e2e/infrastructure validation suites
 - config/: non-secret defaults and configuration templates
 - .github/workflows/: CI/CD workflows and policy checks
+- CONTRIBUTING.md: branch, review, and validation workflow
+- LICENSE: project license text with your project owner details
 
 ## Installation
 
@@ -92,4 +97,4 @@ Link core docs:
 - docs/tasks.md: execution tracker and verification evidence
 
 ---
-*Maintained by [Chinmay Jog](https://github.com/chinmaymjog) | 📖 [Read my articles on Medium](https://medium.com/@chinmaymjog)*
+*Template note: replace placeholders in README, CONTRIBUTING.md, LICENSE, and docs before first release.*
