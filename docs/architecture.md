@@ -10,8 +10,8 @@
 ## How To Use This File
 
 - Explain design choices so a new engineer can understand trade-offs quickly.
-- Keep each section tied to requirement IDs from docs/project-spec.md.
-- Add one ADR entry whenever a non-trivial decision is made.
+- Keep each section tied to requirement IDs from `docs/project-spec.md`.
+- Add one decision record whenever a non-trivial decision is made.
 - Replace placeholders and example rows during the first real draft.
 
 ## System Context
@@ -53,7 +53,12 @@ Important entities, lifecycle, and storage boundaries.
 
 ### Failure Paths
 
-How errors/timeouts/retries are handled.
+How errors, timeouts, retries, and degraded modes are handled.
+
+## Change Boundaries and High-Risk Areas
+
+- Identify surfaces where small code changes can have broad impact.
+- Note where AI should require explicit approval before apply.
 
 ## Deployment Architecture
 
@@ -79,13 +84,6 @@ Match your release flow and artifact rollback policy.
 - Input validation boundaries:
 - Audit/logging requirements:
 
-Example:
-
-- AuthN/AuthZ model: OAuth2 service-to-service with RBAC.
-- Secret management: cloud secret manager only.
-- Input validation boundaries: API gateway + service validation.
-- Audit/logging requirements: immutable audit log for all apply and policy decisions.
-
 ## Observability Strategy
 
 - Logs:
@@ -99,7 +97,7 @@ Example:
 | ---------- | ------- | -------- | ----------- |
 | <dependency> | <purpose> | <risk> | <fallback> |
 
-## Architecture Decision Records (ADR-lite)
+## Decision Records
 
 Use one entry per meaningful decision.
 
@@ -126,10 +124,6 @@ Use this table to show where each requirement is realized in architecture.
 | -------------- | --------------------- | ------ | ----- |
 | FR-001 | Component/Flow/... | ADR-... | ... |
 | NFR-001 | Deployment/Control/... | ADR-... | ... |
-
-## Lessons Learned
-
-- Add lessons only after meaningful implementation or incident learning.
 
 ## Pending Decisions
 

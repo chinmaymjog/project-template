@@ -14,36 +14,45 @@
 - Add requirement IDs you can trace into architecture and tasks.
 - Replace placeholders before the first implementation milestone.
 
-# Goals
+## Project Profile
+
+- Profile: application | infrastructure | library | template | release/distribution
+
+## Goals
 
 - List 3 to 5 outcomes this project must achieve.
 - Use measurable language where possible.
 - Example ID pattern: `FR-001`, `FR-002`, `NFR-001`.
 
-# Non Goals
+## Non Goals
 
 - Explicitly list what this project will not solve.
 
-# Success Criteria
+## Success Criteria
 
 - Define objective checks for success.
 
-# Stakeholders
+## Stakeholders
 
 - Name business and technical owners.
 
-# Assumptions
+## Assumptions
 
 - Capture assumptions that could change scope or timeline.
 
-# Risks
+## Risks
 
 - List top risks and a one-line mitigation for each.
 
-# Scope Summary
+## Change Boundaries
+
+- List the areas that are high-risk on this project.
+- Call out areas that should require explicit approval before AI may apply changes.
+
+## Scope Summary
 
 - Summarize in-scope and out-of-scope boundaries.
 
-# References
+## References
 
 - Link related RFCs, tickets, docs, and external constraints.
