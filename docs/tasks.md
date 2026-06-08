@@ -12,8 +12,32 @@
 - Keep this file lightweight and current.
 - Track only work items that are actively planned or in progress.
 - Every task must include at least one requirement ID.
-- Every completed task must include one validation evidence link or note.
+- Every completed task must include validation evidence.
 - Remove unused example rows once the tracker is active.
+
+## Workflow Rules
+
+### A task may enter Now only when:
+
+- the scope is small enough to complete without hidden sub-projects
+- requirement IDs are known
+- the affected architecture area is understood
+- validation is named before implementation starts
+
+### A task may move to Done only when:
+
+- implementation is complete
+- validation evidence is recorded
+- docs are updated if behavior changed
+- review is complete or explicitly waived
+
+### Acceptable validation evidence
+
+- test command and result
+- screenshot or recording
+- manual verification note
+- diff review note
+- deployment or rollback check
 
 ## Current Focus
 
@@ -60,9 +84,11 @@ Use this for ideas or deferred work.
 ## Quick Coverage Check
 
 - [ ] Every task in Now has requirement IDs.
+- [ ] Every task in Now has defined validation.
 - [ ] Every task in Done has validation evidence.
-- [ ] docs/project-spec.md reflects current scope.
-- [ ] docs/architecture.md reflects major decisions.
+- [ ] `docs/project-spec.md` reflects current scope.
+- [ ] `docs/architecture.md` reflects major decisions.
+- [ ] `docs/ai-rules.md` reflects current AI approval rules.
 
 ## Definition of Done
 

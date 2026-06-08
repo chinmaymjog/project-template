@@ -1,0 +1,22 @@
+stages:
+  - validate
+
+validate:
+  stage: validate
+  image: alpine:3.20
+  script:
+    - echo "Review ci/README.md and replace placeholder commands in this pipeline."
+    - test -f ci/README.md
+    - test -f docs/project-spec.md
+    - test -f docs/architecture.md
+    - test -f docs/ai-operating-contract.md
+    - test -f docs/tasks.md
+    - grep -q "Project:" docs/project-spec.md
+    - grep -q "Project:" docs/architecture.md
+    - grep -q "Project:" docs/ai-operating-contract.md
+    - grep -q "Project:" docs/tasks.md
+    - echo "Replace the next step with project-specific checks such as tests, builds, or IaC validation."
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
