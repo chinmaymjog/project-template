@@ -2,7 +2,7 @@
 
 Short summary of what this project does and why it exists.
 
-This template reflects how I usually start a repo when I know I will be working with AI during planning and implementation.
+This template reflects how I usually start a repo when I know I will be working with AI during planning and implementation. See `CONTRIBUTING.md` for the full default working style, project profiles, and repo standards this template is built around.
 
 ## Start Here
 
@@ -12,6 +12,7 @@ Pick what is useful and delete the rest.
 
 - [ ] Set project name and summary in this README.
 - [ ] Pick a repo shape: usually `infrastructure/platform` or `tool/app`.
+- [ ] Decide who this is for: just me, or someone else picking it up? If someone else, hold it to the three tests in `CONTRIBUTING.md` ("Repos for other people") and consider the `main`/`advanced` branch split from day one rather than retrofitting it later.
 - [ ] Review `CONTRIBUTING.md` and `LICENSE` and replace template placeholders.
 - [ ] Fill only the docs that will actually help the project move faster.
 - [ ] Add implementation files in `src/`, `infra/`, `scripts/`, `tests/`, and `config/` as needed.
