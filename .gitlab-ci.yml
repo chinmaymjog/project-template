@@ -3,7 +3,7 @@ stages:
 
 validate:
   stage: validate
-  image: alpine:3.20
+  image: alpine:3.24
   script:
     - echo "Review ci/README.md and replace placeholder commands in this pipeline."
     - test -f ci/README.md
