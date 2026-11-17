@@ -9,11 +9,11 @@ validate:
     - test -f ci/README.md
     - test -f docs/project-spec.md
     - test -f docs/architecture.md
-    - test -f docs/ai-operating-contract.md
+    - test -f docs/ai-rules.md
     - test -f docs/tasks.md
     - grep -q "Project:" docs/project-spec.md
     - grep -q "Project:" docs/architecture.md
-    - grep -q "Project:" docs/ai-operating-contract.md
+    - grep -q "Project:" docs/ai-rules.md
     - grep -q "Project:" docs/tasks.md
     - echo "Replace the next step with project-specific checks such as tests, builds, or IaC validation."
   rules:
