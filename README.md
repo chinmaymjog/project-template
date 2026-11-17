@@ -18,6 +18,8 @@ Pick what is useful and delete the rest.
 - [ ] Add implementation files in `src/`, `infra/`, `scripts/`, `tests/`, and `config/` as needed.
 - [ ] Add scripts people can run after cloning if that is enough for the repo.
 - [ ] Keep GitLab CI only if the repo actually needs deploy/test automation.
+- [ ] GitHub repos: set up the Claude agent. Create an `agent` environment (you as required reviewer), run `gh secret set CLAUDE_CODE_OAUTH_TOKEN --env agent -R <owner>/<repo>`, then fill in the TODOs in `.github/workflows/claude-agent.yml` and `CLAUDE.md`. Delete both if you do not want an agent on this repo.
+- [ ] GitHub repos: replace `OWNER/REPO` in `SECURITY.md`, enable private vulnerability reporting, secret scanning with push protection and Dependabot, and add a `main` ruleset (require PR and passing checks; block force-push).
 
 ## Project Profile
 

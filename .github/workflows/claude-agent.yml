@@ -1,0 +1,60 @@
+name: Claude agent
+
+# Runs Claude only when the repository owner mentions @claude. Claude proposes
+# changes as branches/PRs; a human must review and merge.
+#
+# Setup for a new repo (see README "Start Here"):
+#   1. Settings > Environments > New environment: `agent` (add yourself as
+#      required reviewer on public repos).
+#   2. gh secret set CLAUDE_CODE_OAUTH_TOKEN --env agent -R <owner>/<repo>
+#   3. Add tool setup steps and edit --allowedTools below for the repo's stack.
+#      Never give this workflow cloud credentials.
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  pull_request_review:
+    types: [submitted]
+  issues:
+    types: [opened, assigned]
+
+permissions: {}
+
+concurrency:
+  group: claude-${{ github.event.issue.number || github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  claude:
+    if: |
+      github.actor == github.repository_owner && (
+        (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+        (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+        (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+        (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: agent
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      # TODO: add toolchain setup for this repo (setup-go, setup-python,
+      # setup-terraform, azure/setup-helm, ...), pinned to a commit SHA.
+      - uses: anthropics/claude-code-action@cc98b3ae241b0fcfb6a42a2690751afffecb4452 # v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # TODO: allow only the verification commands this repo needs, e.g.
+          #   --allowedTools "Bash(pytest:*),Bash(terraform validate:*)"
+          # With no Bash tools allowed Claude can only read and edit files.
+          claude_args: |
+            --max-turns 30
