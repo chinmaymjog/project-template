@@ -1,0 +1,5 @@
+# Replace @chinmaymjog if the owner differs. Sensitive paths always need review.
+*                  @chinmaymjog
+/.github/          @chinmaymjog
+/infra/            @chinmaymjog
+/ci/               @chinmaymjog
