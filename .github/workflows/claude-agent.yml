@@ -3,7 +3,7 @@ name: Claude agent
 # Runs Claude only when the repository owner mentions @claude. Claude proposes
 # changes as branches/PRs; a human must review and merge.
 #
-# Setup for a new repo (see README "Start Here"):
+# Setup for a new repo (see SETUP.md):
 #   1. Settings > Environments > New environment: `agent` (add yourself as
 #      required reviewer on public repos).
 #   2. gh secret set CLAUDE_CODE_OAUTH_TOKEN --env agent -R <owner>/<repo>

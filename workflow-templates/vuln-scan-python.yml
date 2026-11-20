@@ -1,0 +1,41 @@
+# Optional workflow. Copy to .github/workflows/ to enable it, then adjust the paths and names.
+name: Vulnerability scan
+
+# pip-audit checks the Python dependencies (resolved from requirements.txt and
+# requirements-dev.txt) against the PyPI advisory database. Also runs weekly
+# because new advisories are published against unchanged dependencies.
+on:
+  pull_request:
+    paths:
+      - requirements.txt
+      - requirements-dev.txt
+      - .github/workflows/vuln-scan.yml
+  push:
+    branches: [main]
+  schedule:
+    - cron: "23 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vuln-scan-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pip-audit:
+    name: pip-audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: "3.15"
+      - name: Run pip-audit
+        run: |
+          pip install pip-audit==2.10.1
+          pip-audit -r requirements.txt -r requirements-dev.txt --progress-spinner off

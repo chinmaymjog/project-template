@@ -1,102 +1,32 @@
-# <Project Name>
+# <project>
 
-Short summary of what this project does and why it exists.
+<One or two sentences: what it does and why it exists.>
 
-This template reflects how I usually start a repo when I know I will be working with AI during planning and implementation. See `CONTRIBUTING.md` for the full default working style, project profiles, and repo standards this template is built around.
+## Quick start
 
-## Start Here
-
-Use this as a starting point, not a ceremony checklist.
-
-Pick what is useful and delete the rest.
-
-- [ ] Set project name and summary in this README.
-- [ ] Pick a repo shape: usually `infrastructure/platform` or `tool/app`.
-- [ ] Decide who this is for: just me, or someone else picking it up? If someone else, hold it to the three tests in `CONTRIBUTING.md` ("Repos for other people") and consider the `main`/`advanced` branch split from day one rather than retrofitting it later.
-- [ ] Review `CONTRIBUTING.md` and `LICENSE` and replace template placeholders.
-- [ ] Fill only the docs that will actually help the project move faster.
-- [ ] Add implementation files in `src/`, `infra/`, `scripts/`, `tests/`, and `config/` as needed.
-- [ ] Add scripts people can run after cloning if that is enough for the repo.
-- [ ] Keep GitLab CI only if the repo actually needs deploy/test automation.
-- [ ] GitHub repos: set up the Claude agent. Create an `agent` environment (you as required reviewer), run `gh secret set CLAUDE_CODE_OAUTH_TOKEN --env agent -R <owner>/<repo>`, then fill in the TODOs in `.github/workflows/claude-agent.yml` and `CLAUDE.md`. Delete both if you do not want an agent on this repo.
-- [ ] GitHub repos: replace `OWNER/REPO` in `SECURITY.md`, enable private vulnerability reporting, secret scanning with push protection and Dependabot, and add a `main` ruleset (require PR and passing checks; block force-push).
-
-## Project Profile
-
-The two profiles I expect to use most:
-
-- infrastructure / platform
-- tool / app
-
-## Problem Statement
-
-Describe:
-
-- what is currently broken, slow, or risky
-- who is affected
-- why this matters now
-
-## High-Level Architecture
-
-Summarize the main components and flow in a few lines.
-Reference details in `docs/architecture.md` if the project needs it.
-
-## Technology Stack
-
-Document:
-
-- runtime/language
-- infrastructure-as-code tool
-- hosting or cloud target
-- anything important for setup or deployment
-
-## Repository Structure
-
-Keep this tree aligned with the actual repository, but do not keep folders just because the template had them:
-
-```text
-project-root/
-|-- config/
-|-- docs/
-|   |-- ai-rules.md
-|   |-- architecture.md
-|   |-- project-spec.md
-|   `-- tasks.md
-|-- infra/
-|-- scripts/
-|-- src/
-|-- tests/
-|-- CONTRIBUTING.md
-|-- LICENSE
-|-- README.md
-`-- .gitignore
+```sh
+<install and run>
 ```
 
-Directory intent:
+## Commands
 
-- `docs/`: planning and execution source of truth
-- `infra/`: IaC, environment stacks, and platform definitions
-- `scripts/`: automation utilities and helper scripts
-- `src/`: application or service implementation
-- `tests/`: integration, e2e, or infrastructure validation suites
-- `config/`: non-secret defaults and configuration templates
+```sh
+<test>
+<build>
+```
 
-## GitHub And GitLab
+## Docs
 
-For GitHub repos, I am usually fine with scripts people run after cloning.
+- [docs/project-spec.md](docs/project-spec.md): what is being built and why
+- [docs/architecture.md](docs/architecture.md): components and flow
+- [docs/tasks.md](docs/tasks.md): work breakdown
 
-For GitLab repos, I sometimes keep `.gitlab-ci.yml` when the project needs deploy/test automation.
+Delete the docs that don't help.
 
-If a repo does not need CI, I do not force it in.
+## Security
 
-## Documentation
+See [SECURITY.md](SECURITY.md).
 
-Useful docs if the project needs them:
+## License
 
-- `docs/project-spec.md`
-- `docs/architecture.md`
-- `docs/ai-rules.md`
-- `docs/tasks.md`
-
----
-*Template note: replace placeholders in README, CONTRIBUTING.md, LICENSE, and docs before first release.*
+See [LICENSE](LICENSE).

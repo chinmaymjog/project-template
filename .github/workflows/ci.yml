@@ -1,0 +1,35 @@
+name: CI
+
+# The job is called "test" because that is the required check bootstrap-repo.sh
+# puts on main. Replace the TODO step with the project's real checks (tests,
+# build, IaC validation) and add the setup action for the stack above it.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Shell scripts parse and their tests pass
+        run: |
+          shopt -s nullglob
+          for f in scripts/*.sh; do bash -n "$f"; done
+          for t in tests/*.test.sh; do "$t"; done
+      # TODO: setup action for the stack, then the project's checks, e.g.
+      #   go vet ./... && go test ./...
+      #   python -m pytest tests -q
+      #   terraform fmt -check -recursive
