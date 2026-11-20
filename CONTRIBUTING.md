@@ -105,7 +105,7 @@ helper services around the platform.
 Things I usually care about here: clear problem framing, fast iteration,
 simple architecture notes, build and test feedback.
 
-Optional checks starter: `ci/profiles/application.md`
+Optional GitHub Actions starter: `ci/profiles/application.yml`
 
 ## Repo Standards I Keep
 
