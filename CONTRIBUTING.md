@@ -95,7 +95,7 @@ platform automation, cloud foundation work.
 Things I usually care about here: blast radius, environment differences,
 rollout and rollback, secrets and identity, keeping AI changes scoped.
 
-Optional GitLab CI starter: `ci/profiles/infrastructure.md`
+Optional GitHub Actions starter: `ci/profiles/infrastructure.yml`
 
 ### Tool / App
 
@@ -175,7 +175,7 @@ nothing.
 I prefer to keep things as simple as possible. Usually that means:
 
 - use scripts when scripts are enough
-- add GitLab CI only when deploy/test automation is genuinely useful
+- add a GitHub Actions workflow only when test, build or deploy automation is genuinely useful
 - keep host-specific files thin
 
 I do not want CI to become theater.

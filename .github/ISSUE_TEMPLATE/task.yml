@@ -1,0 +1,18 @@
+name: Task
+description: Something to build, change or clean up
+labels: []
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What needs to happen
+      description: Say it in a few lines. Mention @claude in a comment if the agent should take it.
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: How you will know it is finished.
+    validations:
+      required: false
