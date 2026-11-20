@@ -1,0 +1,136 @@
+name: Denylist scan (reusable)
+
+# Fails when added content, file paths, commit metadata or a PR title/body match
+# the regular expression stored in the caller's DENYLIST_REGEX secret. The terms
+# never live in a repository, and a match is reported as file:line only, never
+# as text. Call it from a thin workflow, see denylist-scan.yml.
+#
+# diff mode (pull_request, push): only what the change adds.
+# full mode (schedule, manual): the whole tree and the whole history.
+on:
+  workflow_call:
+    secrets:
+      DENYLIST_REGEX:
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Scan
+        env:
+          DENYLIST_REGEX: ${{ secrets.DENYLIST_REGEX }}
+          EVENT: ${{ github.event_name }}
+          REPO: ${{ github.repository }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          # --- begin script
+          set -euo pipefail
+          re="${DENYLIST_REGEX:-}"
+          if [ -z "$re" ]; then
+            if [ "$EVENT" = pull_request ] && [ "$HEAD_REPO" != "$REPO" ]; then
+              echo "::notice::Pull request from a fork: the secret is unavailable, scan skipped."
+              exit 0
+            fi
+            echo "::error::The DENYLIST_REGEX secret is not set for this repository."
+            exit 1
+          fi
+          rc=0
+          printf 'x\n' | grep -E -- "$re" >/dev/null 2>&1 || rc=$?
+          if [ "$rc" -gt 1 ]; then
+            echo "::error::DENYLIST_REGEX is not a valid extended regular expression."
+            exit 1
+          fi
+
+          # Hash-heavy files produce accidental matches.
+          excl=(':(exclude)*.lock' ':(exclude)*.lock.hcl' ':(exclude)package-lock.json'
+                ':(exclude)go.sum' ':(exclude)*lock.yaml' ':(exclude)*.svg')
+          found=0
+          hit() { echo "::error::$1"; found=1; }
+
+          mode=full
+          case "$EVENT" in
+            pull_request) base="$BASE_SHA"; head="$HEAD_SHA"; mode=diff ;;
+            push)
+              if git cat-file -e "${BEFORE_SHA}^{commit}" 2>/dev/null; then
+                base="$BEFORE_SHA"; head="$AFTER_SHA"; mode=diff
+              fi ;;
+          esac
+
+          # A path that itself matches would print the term, so it is hidden.
+          redact_locs() {
+            while IFS= read -r loc; do
+              [ -n "$loc" ] || continue
+              if printf '%s\n' "${loc%:*}" | grep -qiE -- "$re"; then
+                echo "[path hidden]:${loc##*:}"
+              else
+                echo "$loc"
+              fi
+            done
+          }
+
+          # Added lines of a diff as "path:line<TAB>text", matched, with only the
+          # location kept. Matched text is never printed.
+          scan_added() {
+            git diff -U0 --no-color --no-ext-diff "$1" -- . "${excl[@]}" | awk '
+              /^\+\+\+ /{f=substr($0,7); next}
+              /^@@/{match($0,/\+[0-9]+/); n=substr($0,RSTART+1,RLENGTH-1)+0; next}
+              /^\+/{printf "%s:%d\t%s\n", f, n++, substr($0,2)}' \
+              | grep -iE -- "$re" | cut -f1 || true
+          }
+
+          if [ "$mode" = diff ]; then
+            echo "Diff scan of ${base:0:10}..${head:0:10}"
+            hits="$(scan_added "$base...$head" | redact_locs)"
+            if [ -n "$hits" ]; then
+              echo "$hits" | sed 's/^/  added line: /'
+              hit "Added content matches the deny-list ($(echo "$hits" | wc -l | tr -d ' ') location(s))."
+            fi
+            n="$(git diff --name-only "$base...$head" | grep -ciE -- "$re" || true)"
+            [ "$n" = 0 ] || hit "$n changed file path(s) match the deny-list."
+            range="$base..$head"
+            for sel in --grep --author --committer; do
+              h="$(git log "$range" -i -E "$sel=$re" --format=%h | tr '\n' ' ')"
+              [ -z "$h" ] || hit "Commit $sel matches the deny-list in: $h"
+            done
+            if printf '%s\n%s\n' "${PR_TITLE:-}" "${PR_BODY:-}" | grep -qiE -- "$re"; then
+              hit "The pull request title or description matches the deny-list."
+            fi
+          else
+            echo "Full scan of the tree and history"
+            hits="$(git grep -InE -i -e "$re" -- . "${excl[@]}" | cut -d: -f1,2 | redact_locs || true)"
+            if [ -n "$hits" ]; then
+              echo "$hits" | sed 's/^/  tree: /'
+              hit "Tree content matches the deny-list ($(echo "$hits" | wc -l | tr -d ' ') location(s))."
+            fi
+            n="$(git ls-files | grep -ciE -- "$re" || true)"
+            [ "$n" = 0 ] || hit "$n tracked file path(s) match the deny-list."
+            h="$(git log --all -i -E -G"$re" --format=%h -- . "${excl[@]}" | sort -u | tr '\n' ' ')"
+            [ -z "$h" ] || hit "History: content of these commits matches the deny-list: $h"
+            for sel in --grep --author --committer; do
+              h="$(git log --all -i -E "$sel=$re" --format=%h | sort -u | tr '\n' ' ')"
+              [ -z "$h" ] || hit "History: commit $sel matches the deny-list in: $h"
+            done
+          fi
+
+          if [ "$found" -ne 0 ]; then
+            echo "Matches are not printed. Locate them locally with your own copy of the pattern."
+            exit 1
+          fi
+          echo "No matches."
+          # --- end script

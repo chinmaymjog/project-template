@@ -1,0 +1,23 @@
+name: Denylist scan tests
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/denylist-scan-reusable.yml
+      - tests/denylist-scan.test.sh
+      - .github/workflows/denylist-scan-test.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Scan script tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - run: tests/denylist-scan.test.sh
