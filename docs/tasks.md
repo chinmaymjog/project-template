@@ -88,7 +88,6 @@ Use this for ideas or deferred work.
 - [ ] Every task in Done has validation evidence.
 - [ ] `docs/project-spec.md` reflects current scope.
 - [ ] `docs/architecture.md` reflects major decisions.
-- [ ] `docs/ai-rules.md` reflects current AI approval rules.
 
 ## Definition of Done
 

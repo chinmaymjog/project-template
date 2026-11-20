@@ -1,8 +1,8 @@
 name: CI
 
-# Starter checks. The template ships the one check that works everywhere (the
-# planning docs exist). Add the project's own checks in the TODO step, or copy
-# a starter from ci/profiles/. Delete this file if the repo needs no CI.
+# The job is called "test" because that is the required check bootstrap-repo.sh
+# puts on main. Replace the TODO step with the project's real checks (tests,
+# build, IaC validation) and add the setup action for the stack above it.
 on:
   pull_request:
   push:
@@ -16,20 +16,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  validate:
-    name: Validate
+  test:
+    name: test
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
-      - name: Planning docs are in place
+      - name: Shell scripts parse and their tests pass
         run: |
-          for f in docs/project-spec.md docs/architecture.md docs/ai-rules.md docs/tasks.md; do
-            test -f "$f" || { echo "missing $f"; exit 1; }
-            grep -q "Project:" "$f" || { echo "$f has no Project: line"; exit 1; }
-          done
-      # TODO: replace with the project's checks (tests, build, IaC validation).
-      - name: Project checks
-        run: echo "Add project-specific checks here; see ci/profiles/."
+          shopt -s nullglob
+          for f in scripts/*.sh; do bash -n "$f"; done
+          for t in tests/*.test.sh; do "$t"; done
+      # TODO: setup action for the stack, then the project's checks, e.g.
+      #   go vet ./... && go test ./...
+      #   python -m pytest tests -q
+      #   terraform fmt -check -recursive
